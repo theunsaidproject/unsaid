@@ -1,0 +1,462 @@
+index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f6f1eb">
+<meta name="description" content="UNSAID is a teen storytelling and mental health awareness project reminding people that they are not alone.">
+<title>UNSAID. — Someone else has felt this, too.</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap');
+
+:root {
+  --cream:#f6f1eb;
+  --paper:#fffdf9;
+  --ink:#302d35;
+  --muted:#77717b;
+  --lavender:#ded6ed;
+  --purple:#78658f;
+  --sage:#dce5d8;
+  --peach:#f1d9ca;
+  --line:#e7dfd7;
+}
+* {box-sizing:border-box;scroll-behavior:smooth}
+body {margin:0;background:var(--cream);color:var(--ink);font-family:'DM Sans',sans-serif;line-height:1.7}
+a {color:inherit}
+button,input,textarea,select {font:inherit}
+button {cursor:pointer}
+nav {display:flex;align-items:center;justify-content:space-between;padding:20px 7%;gap:20px;border-bottom:1px solid var(--line);background:var(--cream)}
+.logo {font-family:'Playfair Display',serif;font-size:29px;font-weight:700;letter-spacing:3px;text-decoration:none}
+.navlinks {display:flex;gap:22px;flex-wrap:wrap}
+.navlinks a {font-size:13px;text-decoration:none;color:var(--muted)}
+.navlinks a:hover {color:var(--purple)}
+.hero {padding:100px 8% 90px;min-height:490px;display:grid;grid-template-columns:1.2fr .8fr;gap:45px;align-items:center;background:radial-gradient(ellipse at 85% 25%,#e1d8ec 0%,transparent 40%),var(--cream)}
+.eyebrow {font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--purple);font-weight:700}
+h1,h2,h3 {font-family:'Playfair Display',serif;font-weight:500;line-height:1.18}
+h1 {font-size:clamp(55px,8vw,94px);letter-spacing:-3px;margin:18px 0}
+h1 em {color:var(--purple);font-weight:500}
+.hero p {font-size:17px;color:var(--muted);max-width:510px}
+.actions {display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn {display:inline-block;border:1px solid var(--purple);background:var(--purple);color:white;padding:12px 20px;border-radius:3px;text-decoration:none;font-size:13px;transition:.2s}
+.btn:hover {transform:translateY(-2px);opacity:.88}
+.btn.secondary {background:transparent;color:var(--ink);border-color:#cfc3d8}
+.art {min-height:290px;display:grid;place-items:center;position:relative}
+.art-card {width:min(100%,330px);min-height:270px;background:var(--paper);padding:35px;border:1px solid var(--line);box-shadow:14px 14px 0 var(--lavender);display:flex;flex-direction:column;justify-content:center;transform:rotate(2deg)}
+.art-card .big {font-family:'Playfair Display',serif;font-size:34px;line-height:1.25}
+.art-card small {margin-top:25px;color:var(--muted);letter-spacing:1px}
+section {padding:76px 8%}
+.section-head {max-width:650px;margin-bottom:34px}
+h2 {font-size:clamp(34px,5vw,49px);margin:10px 0 15px}
+.section-head p,.muted {color:var(--muted)}
+.intro {background:var(--paper);text-align:center;padding:56px 10%}
+.intro blockquote {font-family:'Playfair Display',serif;font-size:clamp(24px,4vw,36px);max-width:780px;margin:20px auto;line-height:1.5}
+.stories {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.story {padding:25px;background:var(--paper);border:1px solid var(--line);display:flex;flex-direction:column;align-items:flex-start;min-height:270px}
+.story:nth-child(3n+1) .story-mark {background:var(--lavender)}
+.story:nth-child(3n+2) .story-mark {background:var(--sage)}
+.story:nth-child(3n) .story-mark {background:var(--peach)}
+.story-mark {width:42px;height:5px;margin-bottom:20px}
+.tag {font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--purple);font-weight:700}
+.story h3 {font-size:25px;margin:12px 0}
+.story p {font-size:14px;color:var(--muted);margin-top:0}
+.text-button {border:0;background:none;padding:0;color:var(--purple);font-weight:700;font-size:13px;margin-top:auto}
+.text-button:hover {text-decoration:underline}
+.filter-row {display:flex;gap:8px;flex-wrap:wrap;margin:0 0 25px}
+.filter {border:1px solid var(--line);background:transparent;padding:8px 14px;border-radius:30px;font-size:12px;color:var(--ink)}
+.filter.active,.filter:hover {background:var(--purple);color:white;border-color:var(--purple)}
+.feature {background:#e7e0ee}
+.feature-layout {display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.prompt-box {background:var(--paper);padding:28px;border:1px solid #d7cbe0}
+select,input,textarea {width:100%;padding:12px;border:1px solid #d9cfdc;background:white;color:var(--ink);border-radius:3px;margin:8px 0 16px}
+textarea {resize:vertical;min-height:145px}
+.result {margin-top:18px;padding:18px;background:var(--cream);border-left:3px solid var(--purple);display:none}
+.result.show {display:block}
+.result h3 {font-size:24px;margin:0 0 8px}
+.note {font-size:12px;color:var(--muted)}
+.journal {background:var(--sage)}
+.journal-layout {display:grid;grid-template-columns:.8fr 1.2fr;gap:40px}
+.guidelines {background:rgba(255,255,255,.55);padding:25px}
+.guidelines li {margin:9px 0;color:#565c53}
+.support-grid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.support-card {padding:24px;background:var(--paper);border:1px solid var(--line)}
+.support-card h3 {font-size:24px;margin:10px 0}
+.support-card p {font-size:14px;color:var(--muted)}
+.support-card a {color:var(--purple);font-weight:700}
+.about {background:var(--paper)}
+.about-layout {display:grid;grid-template-columns:1fr 1fr;gap:45px}
+footer {padding:35px 8%;background:#302d35;color:#f6f1eb}
+footer p {font-size:12px;color:#d0c8d4}
+.footerlinks {display:flex;gap:18px;flex-wrap:wrap}
+.footerlinks a {font-size:12px;color:#eee5f3}
+.modal {position:fixed;inset:0;background:#201d25b8;display:none;align-items:center;justify-content:center;padding:20px;z-index:5}
+.modal.open {display:flex}
+.modal-content {max-width:600px;width:100%;max-height:85vh;overflow:auto;background:var(--paper);padding:30px}
+.modal-content h2 {font-size:35px}
+.close {float:right;border:1px solid var(--line);background:transparent;padding:5px 10px}
+@media(max-width:760px) {
+ nav {padding:16px 5%;align-items:flex-start}
+ .navlinks {gap:10px;justify-content:flex-end}
+ .navlinks a {font-size:11px}
+ .hero {padding:65px 7%;grid-template-columns:1fr;gap:15px}
+ .art {min-height:250px}
+ section {padding:55px 6%}
+ .stories,.support-grid {grid-template-columns:1fr}
+ .feature-layout,.journal-layout,.about-layout {grid-template-columns:1fr;gap:24px}
+ .story {min-height:220px}
+}
+</style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="#home">UNSAID.</a>
+  <div class="navlinks">
+    <a href="#stories">Stories</a>
+    <a href="#read">Read this if…</a>
+    <a href="#write">Reflect</a>
+    <a href="#support">Support</a>
+  </div>
+</nav>
+
+<main>
+<header class="hero" id="home">
+  <div>
+    <div class="eyebrow">A place for the things we don't say</div>
+    <h1>You don't have to <em>feel alone.</em></h1>
+    <p>For the feelings we hide, the words we swallow, and the days we don't know how to explain. Someone else has felt this, too.</p>
+    <div class="actions">
+      <a class="btn" href="#stories">Find a story ↗</a>
+      <a class="btn secondary" href="#read">Start where you are</a>
+    </div>
+  </div>
+  <div class="art" aria-label="Decorative story card">
+    <div class="art-card">
+      <span class="eyebrow">A small reminder</span>
+      <div class="big">You are more than the parts of yourself you think you need to fix.</div>
+      <small>— A NOTE TO KEEP</small>
+    </div>
+  </div>
+</header>
+
+<section class="intro">
+  <div class="eyebrow">Why UNSAID exists</div>
+  <blockquote>“Sometimes the hardest part isn't explaining how you feel. It's wondering if anyone would understand.”</blockquote>
+  <p class="muted">This is a place for honest stories, gentle reflection, and reminders that your feelings deserve to be heard.</p>
+</section>
+
+<section id="stories">
+  <div class="section-head">
+    <div class="eyebrow">The story library</div>
+    <h2>Maybe these words are yours, too.</h2>
+    <p>Every story below is fictional, created to explore feelings that can be difficult to put into words. Find one that meets you where you are.</p>
+  </div>
+  <div class="filter-row" aria-label="Filter stories">
+    <button class="filter active" data-filter="all">All stories</button>
+    <button class="filter" data-filter="lonely">Loneliness</button>
+    <button class="filter" data-filter="pressure">Pressure</button>
+    <button class="filter" data-filter="identity">Identity</button>
+    <button class="filter" data-filter="friendship">Friendship</button>
+  </div>
+  <div class="stories">
+    <article class="story" data-category="lonely">
+      <div class="story-mark"></div><span class="tag">Loneliness</span>
+      <h3>The Friend Everyone Thinks I Have</h3>
+      <p>Surrounded by people, but still unsure who would notice if a hard day became a harder week.</p>
+      <button class="text-button" data-story="friend">Read this story ↗</button>
+    </article>
+    <article class="story" data-category="pressure">
+      <div class="story-mark"></div><span class="tag">Pressure</span>
+      <h3>Almost Good Enough</h3>
+      <p>When a good result still feels like failure because the goalposts keep moving.</p>
+      <button class="text-button" data-story="grade">Read this story ↗</button>
+    </article>
+    <article class="story" data-category="identity">
+      <div class="story-mark"></div><span class="tag">Identity</span>
+      <h3>I Don't Know Who I'm Supposed to Be</h3>
+      <p>Trying to become yourself while everyone seems to have an opinion about who that should be.</p>
+      <button class="text-button" data-story="identity">Read this story ↗</button>
+    </article>
+    <article class="story" data-category="friendship">
+      <div class="story-mark"></div><span class="tag">Friendship</span>
+      <h3>When the Group Chat Goes Quiet</h3>
+      <p>Learning that a silence can feel enormous when you're already worried you don't belong.</p>
+      <button class="text-button" data-story="chat">Read this story ↗</button>
+    </article>
+    <article class="story" data-category="pressure">
+      <div class="story-mark"></div><span class="tag">Expectations</span>
+      <h3>The Person Everyone Relies On</h3>
+      <p>Being the dependable one and wondering where your own difficult feelings are supposed to go.</p>
+      <button class="text-button" data-story="rely">Read this story ↗</button>
+    </article>
+    <article class="story" data-category="lonely">
+      <div class="story-mark"></div><span class="tag">Being understood</span>
+      <h3>I Practiced Saying “I'm Fine”</h3>
+      <p>How a familiar answer can become easier than explaining what you really need.</p>
+      <button class="text-button" data-story="fine">Read this story ↗</button>
+    </article>
+  </div>
+</section>
+
+<section class="feature" id="read">
+  <div class="feature-layout">
+    <div>
+      <div class="eyebrow">A moment for you</div>
+      <h2>Read this if…</h2>
+      <p>There's no right way to feel. Choose the words closest to your day and find a small reminder written with you in mind.</p>
+    </div>
+    <div class="prompt-box">
+      <label for="feeling">Today, I feel…</label>
+      <select id="feeling">
+        <option value="lonely">Like I don't belong</option>
+        <option value="pressure">Like nothing I do is enough</option>
+        <option value="overwhelmed">Like everything is too much</option>
+        <option value="misunderstood">Like nobody understands me</option>
+        <option value="uncertain">Unsure of who I am</option>
+      </select>
+      <button class="btn" id="show-message">Find my reminder ↗</button>
+      <div class="result" id="message" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<section class="journal" id="write">
+  <div class="journal-layout">
+    <div>
+      <div class="eyebrow">Let it out</div>
+      <h2>You don't need perfect words.</h2>
+      <p>Sometimes it helps to name what's going on, even if no one else reads it. Use this space for a private reflection on your own device.</p>
+      <div class="guidelines">
+        <strong>A few gentle reminders</strong>
+        <ul>
+          <li>You can write one sentence or none at all.</li>
+          <li>You don't have to solve everything today.</li>
+          <li>A trusted person can help you carry something heavy.</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <label for="journal-prompt">A prompt, if you need one</label>
+      <p id="journal-prompt">What do I wish someone understood about today?</p>
+      <textarea id="journal-entry" placeholder="Start wherever you are…"></textarea>
+      <div class="actions">
+        <button class="btn" id="new-prompt">Give me another prompt</button>
+        <button class="btn secondary" id="clear-entry">Clear writing</button>
+      </div>
+      <p class="note">This prototype does not send or save your writing to a server. It remains in this page while it is open; clearing it removes it from the box. Avoid entering names, contact details, or other identifying information. This is not a crisis service.</p>
+      <p id="clear-status" class="note" aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
+<section id="support">
+  <div class="section-head">
+    <div class="eyebrow">You deserve support, too</div>
+    <h2>Stories can help us feel seen. People can help us through.</h2>
+    <p>UNSAID is a storytelling awareness project, not a substitute for professional help. If something feels too heavy to handle alone, consider reaching out to someone you trust.</p>
+  </div>
+  <div class="support-grid">
+    <article class="support-card">
+      <span class="tag">Start close</span>
+      <h3>A trusted adult</h3>
+      <p>A parent or caregiver, school counselor, teacher, coach, or another adult you feel safe talking with can help you find your next step.</p>
+    </article>
+    <article class="support-card">
+      <span class="tag">At school</span>
+      <h3>Ask for support</h3>
+      <p>You don't need a perfect explanation. You can start with: “I've been having a hard time, and I'd like to talk to someone.”</p>
+    </article>
+    <article class="support-card">
+      <span class="tag">United States</span>
+      <h3>Talk to someone now</h3>
+      <p>If you're in emotional distress or need crisis support, call or text 988 for the Suicide & Crisis Lifeline. If there is immediate danger, contact emergency services.</p>
+      <a href="https://988lifeline.org/" target="_blank" rel="noopener noreferrer">Visit 988 Lifeline ↗</a>
+    </article>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="about-layout">
+    <div>
+      <div class="eyebrow">The heart of UNSAID</div>
+      <h2>Every feeling has a place here.</h2>
+    </div>
+    <div>
+      <p>UNSAID was imagined as a space where teenagers can encounter stories about loneliness, expectations, friendship, identity, and the pressure to seem okay.</p>
+      <p>Its purpose is simple: to remind people that a difficult feeling doesn't make them broken, and that asking for support is a valid next step.</p>
+      <p class="muted">The stories on this prototype are fictional examples, not testimonials from real people. The site does not provide diagnosis or treatment.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <a class="logo" href="#home">UNSAID.</a>
+  <p>Someone else has felt this, too.</p>
+  <div class="footerlinks">
+    <a href="#stories">Stories</a>
+    <a href="#support">Find support</a>
+    <a href="#about">About</a>
+    <a href="#write">Reflect</a>
+  </div>
+  <p>Created as a teen mental-health awareness and storytelling project.</p>
+</footer>
+
+<div class="modal" id="story-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-content">
+    <button class="close" id="close-modal" aria-label="Close story">Close ✕</button>
+    <div class="eyebrow">A fictional UNSAID story</div>
+    <h2 id="modal-title"></h2>
+    <p class="muted">A story created for reflection. Experiences vary, and no single story speaks for everyone.</p>
+    <div id="modal-story"></div>
+    <hr style="border:0;border-top:1px solid var(--line);margin:25px 0">
+    <strong>A thought to take with you</strong>
+    <p id="modal-reflection"></p>
+    <button class="btn" id="modal-done">Back to stories</button>
+  </div>
+</div>
+
+<script>
+const stories = {
+ friend: {
+  title:"The Friend Everyone Thinks I Have",
+  paragraphs:[
+   "At lunch, I was never alone. Someone always waved me over, someone always laughed at my jokes, and there was always a place for me at the table.",
+   "That was why I felt strange admitting that I was lonely. From the outside, my life looked full. I worried that saying I was struggling would sound ungrateful, as if having people around meant I wasn't allowed to want a deeper connection.",
+   "One afternoon, I almost told a friend that I hadn't been feeling like myself. I changed the subject instead. But later I realized that I didn't need to prove my loneliness was serious enough to deserve a conversation.",
+   "The next day, I tried again. I didn't explain everything. I just said, 'I've felt a little disconnected lately. Can we talk?' It wasn't a perfect beginning, but it was a beginning."
+  ],
+  reflection:"Being around people and feeling connected are not always the same thing. What might help you tell a safe person how you've really been feeling?"
+ },
+ grade:{
+  title:"Almost Good Enough",
+  paragraphs:[
+   "I checked the grade, felt relieved for about three seconds, and then noticed the one point I had missed. My mind skipped past what I had done well and went straight to what I could have done better.",
+   "I had started treating every result like a verdict on who I was. A good grade meant I could breathe for a moment. Anything less meant I had somehow let everyone down, even when nobody had said that.",
+   "It took time to understand that effort and worth were not the same measurement. I could want to improve without turning every mistake into a reason to be cruel to myself.",
+   "The grade still mattered to me. It just didn't get to tell the whole story about me."
+  ],
+  reflection:"If someone you cared about got the same result, what would you say to them? Is there a way to offer yourself some of that same fairness?"
+ },
+ identity:{
+  title:"I Don't Know Who I'm Supposed to Be",
+  paragraphs:[
+   "It felt like everyone had received instructions I had somehow missed. People seemed certain about their style, their plans, their friendships, and the kind of person they wanted to become.",
+   "I tried on other people's opinions like clothes that didn't quite fit. I wondered whether changing my mind meant I was fake, and whether not knowing the answer meant there was something wrong with me.",
+   "Then I had a small, ordinary afternoon where I chose what I liked without asking anyone if it made sense. Nothing dramatic happened. I just noticed that the choice felt like mine.",
+   "Maybe becoming yourself isn't one big discovery. Maybe it's a collection of small decisions, and permission to keep growing."
+  ],
+  reflection:"What is one thing you like, believe, or enjoy simply because it feels right to you?"
+ },
+ chat:{
+  title:"When the Group Chat Goes Quiet",
+  paragraphs:[
+   "The conversation had been moving quickly, then stopped. I checked my phone again and began wondering whether I had said something strange. There was no evidence, just a quiet space where my worries got loud.",
+   "I knew people had homework, chores, and lives outside a screen. Still, uncertainty made it easy to imagine that silence was a message about me.",
+   "I put my phone down and did something else for a while. The uncomfortable feeling didn't disappear immediately, but I remembered that I couldn't know what everyone else was thinking from a blank screen.",
+   "When I was ready, I reached out to one friend directly. A conversation told me more than an hour of guessing ever could."
+  ],
+  reflection:"When uncertainty makes your mind fill in the blanks, what other explanations might be possible?"
+ },
+ rely:{
+  title:"The Person Everyone Relies On",
+  paragraphs:[
+   "People came to me when they needed help. I remembered details, listened to problems, and tried to be the calm one. I liked being someone people could count on.",
+   "But sometimes I wanted someone to notice that I was tired, too. I didn't know how to ask. I worried that needing help would change the way people saw me.",
+   "Eventually I told someone I trusted, 'I want to talk about something, but I don't need you to fix it. I just need you to listen.' They did.",
+   "I learned that being dependable didn't mean being endlessly available. I could care about people and still have needs of my own."
+  ],
+  reflection:"What kind of support would feel helpful to you right now: being listened to, getting practical help, or having some time to rest?"
+ },
+ fine:{
+  title:"I Practiced Saying “I'm Fine”",
+  paragraphs:[
+   "I had become very good at answering questions quickly. 'How are you?' 'Fine.' 'Everything okay?' 'Yep.' The words arrived before I had time to decide whether they were true.",
+   "I wasn't always ready to explain what was happening inside my head. Sometimes I didn't understand it myself. Saying I was fine gave me a few more seconds before anyone asked another question.",
+   "One person asked again, gently, and gave me room not to answer perfectly. I said, 'I'm not sure how I feel, honestly.' That was all I managed, and it was enough to start a conversation.",
+   "I learned that telling the truth doesn't require having the whole story figured out."
+  ],
+  reflection:"Is there someone who could listen without needing you to explain everything perfectly?"
+ }
+};
+document.querySelectorAll(".filter").forEach(button=>{
+ button.addEventListener("click",()=>{
+  document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));
+  button.classList.add("active");
+  document.querySelectorAll(".story").forEach(card=>{
+   card.hidden=button.dataset.filter!=="all" && card.dataset.category!==button.dataset.filter;
+  });
+ });
+});
+const modal=document.getElementById("story-modal");
+function closeModal(){modal.classList.remove("open")}
+document.querySelectorAll("[data-story]").forEach(button=>{
+ button.addEventListener("click",()=>{
+  const story=stories[button.dataset.story];
+  document.getElementById("modal-title").textContent=story.title;
+  const body=document.getElementById("modal-story");
+  body.replaceChildren();
+  story.paragraphs.forEach(paragraph=>{
+   const p=document.createElement("p");p.textContent=paragraph;body.appendChild(p);
+  });
+  document.getElementById("modal-reflection").textContent=story.reflection;
+  modal.classList.add("open");
+  document.getElementById("close-modal").focus();
+ });
+});
+document.getElementById("close-modal").addEventListener("click",closeModal);
+document.getElementById("modal-done").addEventListener("click",closeModal);
+modal.addEventListener("click",event=>{if(event.target===modal)closeModal()});
+document.addEventListener("keydown",event=>{if(event.key==="Escape")closeModal()});
+
+const reminders={
+ lonely:{
+  title:"You can be surrounded and still feel alone.",
+  text:"Feeling disconnected doesn't mean you're ungrateful or that you don't belong. You deserve friendships where you can be honest, too. Is there one person you might feel safe reaching out to?"
+ },
+ pressure:{
+  title:"Your worth isn't a score.",
+  text:"You can care about doing well without making every result a measure of your value. Rest, mistakes, and learning are part of being human—not proof that you've failed."
+ },
+ overwhelmed:{
+  title:"You can take one step at a time.",
+  text:"You don't have to solve every problem in one sitting. It may help to choose one small next step, take a pause, or ask someone you trust to help you sort through what's urgent."
+ },
+ misunderstood:{
+  title:"You deserve to be heard.",
+  text:"It can be exhausting to search for words that make someone understand. You don't have to explain everything perfectly. Starting with one honest sentence can be enough."
+ },
+ uncertain:{
+  title:"You are allowed to still be becoming.",
+  text:"You don't need a complete plan for who you are. Your interests, opinions, and hopes can grow and change. You can discover yourself a little at a time."
+ }
+};
+document.getElementById("show-message").addEventListener("click",()=>{
+ const reminder=reminders[document.getElementById("feeling").value];
+ const result=document.getElementById("message");
+ result.replaceChildren();
+ const heading=document.createElement("h3");heading.textContent=reminder.title;
+ const paragraph=document.createElement("p");paragraph.textContent=reminder.text;
+ result.append(heading,paragraph);result.classList.add("show");
+});
+const prompts=[
+ "What do I wish someone understood about today?",
+ "What has been taking up the most space in my mind?",
+ "What would I tell a friend who felt the way I do?",
+ "What is one thing I need more of this week?",
+ "What am I allowed to give myself permission to do?",
+ "What is something I have been carrying quietly?"
+];
+document.getElementById("new-prompt").addEventListener("click",()=>{
+ const current=document.getElementById("journal-prompt").textContent;
+ const options=prompts.filter(prompt=>prompt!==current);
+ document.getElementById("journal-prompt").textContent=options[Math.floor(Math.random()*options.length)];
+ document.getElementById("clear-status").textContent="";
+});
+document.getElementById("clear-entry").addEventListener("click",()=>{
+ document.getElementById("journal-entry").value="";
+ document.getElementById("clear-status").textContent="Your writing has been cleared from the box.";
+});
+</script>
+</body>
+</html>
+
